@@ -1,0 +1,121 @@
+\documentclass[11pt]{article}
+\usepackage{times}
+\usepackage[applemac]{inputenc}
+
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amssymb,amsmath,epsfig,multirow}
+
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bd}{\mathbf{d}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bt}{\mathbf{t}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bv}{\mathbf{v}}
+
+\newcommand{\cx}{\mathcal{X}}
+\newcommand{\cy}{\mathcal{Y}}
+\newcommand{\cc}{\mathcal{C}}
+\newcommand{\cd}{\mathcal{D}}
+\newcommand{\cz}{\mathcal{Z}}
+\newcommand{\cl}{\mathcal{L}}
+
+\newcommand{\nw}{\mathnormal{w}}
+\newcommand{\nx}{\mathnormal{x}}
+\newcommand{\ny}{\mathnormal{y}}
+\newcommand{\nz}{\mathnormal{z}}
+
+\newcommand{\sx}{\textsf{x}}
+
+\newcommand{\argmax}[1]{\underset{#1}{\operatorname{argmax}}}
+\newcommand{\transpose}{^{\mbox{\scriptsize \text{T}}}}
+\newcommand{\argmin}[1]{\underset{#1}{\operatorname{argmin}}}
+\newcommand{\condon}{\hspace{0pt} | \hspace{1pt}}
+\newcommand{\expect}{\mathbb{E}}
+\newcommand{\reals}{\mathbb{R}}
+
+
+\setlength{\topmargin}{0in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{-0.2in}
+\setlength{\textheight}{9.0in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.0in}
+
+\providecommand{\answer}[1]{}
+%\providecommand{\answer}[1]{\paragraph{Answer:} {\em #1}}
+
+%% no extra spacing after dots
+\frenchspacing
+
+\title{Machine Learning MT 2012: Week 3, Practical 1} 
+\author{{\bf Lecturer:} Phil Blunsom\\
+        {\bf Demonstrator:} Vasile Palade}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Introduction}
+In this introductory practical you will complete the implementation of a Naive Bayes model for document classification.
+
+Python framework code is provided such that the Naive Bayes model can be implemented by filling in the missing functions.
+A binary document classification dataset is supplied which consists of text reviews of movies divided into negative and positive classes depending on the prevailing sentiment of the reviewers towards the movies.
+
+
+\section*{Code}
+The code for this project is written to run under Python 2.6. 
+Googling Python will reveal a wealth of API information and tutorials.
+You should also note that the python interactive interpreter is invaluable for experimenting with the language.
+In particular the {\tt dir()} and {\tt help()} functions are very useful for learning about the interfaces of the APIs.
+For example {\tt help(open)} displays a short help page on the built-in function {\tt open}. 
+
+At the following URL you will find an archive of files for this practical which, when downloaded and unzipped, will provide a directory {\tt ml\_practical\_1}:
+
+\begin{figure}[h]
+\footnotesize 
+\begin{center}
+\url{http://www.cs.ox.ac.uk/teaching/materials12-13/machinelearning/practical1.tar.gz}
+\end{center}
+\end{figure}
+This directory contains a partially implemented Python source file and a directory containing movie reviews.
+The {\tt naive\_bayes.py} source file contains calls to a {\tt todo()} placeholder function which throws an exception.
+You should carefully read through the provided code to understand how it implements the text classification model described in the lecture notes.
+To complete this practical you will then need to provide the code that should replace these {\tt todos}.
+
+
+\begin{description}
+\item[\bf naive\_bayes.py] 
+This file contains an implementation of a binary Naive Bayes classifier for the review data. It contains two functions, {\tt experiment} and {\tt main}. {\tt experiment} reads the review documents, randomly partitions the documents into training and test sets, collects the word counts needed to train the Naive Bayes classifier, and then tests the classifier on the test documents.
+The {\tt main} function processes the command-line arguments and calls {\tt experiment}, possibly multiple times.
+
+\item[\bf stopwords.py] 
+This file contains a list of stop-words which can be used to filter the word features for the Naive Bayes classifier.
+
+\end{description}
+
+
+\section*{Data}
+\begin{description}
+\item[\bf Review data:]
+This data consists of the text of movie review divide into positive and negative sets. 
+The creation of this data is described in the research paper:
+\begin{quote}
+Bo Pang and Lillian Lee, {\em A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based on Minimum Cuts}, Proceedings of ACL 2004. \\
+{\footnotesize \url{http://www.cs.cornell.edu/people/pabo/movie-review-data/}}
+\end{quote}
+\end{description}
+
+\section*{Task}
+The file {\tt naive\_bayes.py} contains two {\tt todo()} statements that you need to replace with code in order to complete the implementation of the classifier. You should implement the MAP calculations for the probabilities {\tt p(C)} and {\tt p(word|C)} with Dirichlet prior parameters set from the command-line ({\tt args['alpha']} and {\tt args['beta']} respectively).
+As mentioned in the code, it is a good idea to calculate the required probabilities in log space (python function {\tt log()}) in order to avoid numerical underflow caused by multiplying lots of small numbers together.
+
+Once you have a working implementation, run the model repeatedly (use the {\tt -i} argument) for multiple different values for alpha and beta ({\tt -a} and {\tt -b}). Graph the results by hand and identify optimum values for the prior parameters.
+
+\section*{Assessment}
+This practical will not be assessed. It is intended to reinforce the elements of the Naive Bayes algorithm, document classification, and setting model parameters.
+
+\end{document}
